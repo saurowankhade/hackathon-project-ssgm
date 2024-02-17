@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --color : blue;
+}
+
+
+body{
+    /* font family */
+    font-family: "Anta", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+main{
+    height: 100svh;
+}
+.bg_shape{
+    height: 100svh;
+    background-color: var(--color);
+    clip-path: circle(75.0% at 100% 99%);
+}
+.title{
+    position: absolute;
+    width: 40%;
+    display: block;
+    font-size: 20px;
+    padding: 100px;
+    color: var(--color);
+}
+.title p{
+    margin-top: 25px;
+    color: rgba(0, 0, 255, 0.81);
+}
+.selecter_age{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+
+}
+
+.age{
+    width: 100px;
+    height: 100px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    border-radius: 50%;
+    margin-left: 700px;
+    margin-top: 40px;
+
+    text-align: center;
+    align-items: center;
+    justify-content: flex;
+}
+
+.baby,.young,.middel{
+    padding: 0px 0px 0px 30px;
+    font-style: oblique;
+}
+.gif{
+    background-image: url("media/cartoon_of_firstPage.gif");
+    height: 40px;
+    width: 40px;
+    ba
+}
+
