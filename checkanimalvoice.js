@@ -32,13 +32,19 @@ console.log(ran)
 imgs.forEach(img => {
     img.addEventListener('click',()=>{
         let m1 = img.getAttribute('alt');
+        temp_result.style.visibility = 'visible';
         if(m1 === animalList[ran]){
             console.log('You are winner ')
-            temp_result.style.visibility = 'visible';
             temp_result_h.innerText = 'You Win!!';
 
         } else{
             console.log('you lost game!')
+            temp_result_h.innerText = 'You Lost!!';
         }
+
+        setTimeout(()=>{
+
+            temp_result.style.visibility = 'hidden';
+        },2000);
     });
 });
