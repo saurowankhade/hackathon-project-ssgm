@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jumbled Letter Game</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      .letter-card {
+        display: inline-block;
+        margin: 5px;
+        width: 100px;
+        height: 100px;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        font-size: xx-large;
+        border: 1px solid #ccc;
+        cursor: pointer;
+      }
+
+      #wordImage {
+        width: 200px; /* Adjust the size as needed */
+        height: auto;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Jumbled Letter Game</h1>
+    <center>
+      <div id="gameContainer">
+        <img id="wordImage" src="" alt="Word Image" />
+        <div id="lettersContainer"></div>
+        <div id="selectedLetters"></div>
+        <button class="resetButton btn btn-primary" onclick="resetGame">
+          Reset
+        </button>
+        <div id="message"></div>
+      </div>
+    </center>
+
+    <script>
+      // Define multiple correct words and their corresponding image paths
+      const words = [
+        "chair",
+        "earth",
+        "heart",
+        "thumb",
+        "apple",
+        "tiger",
+        "bicycle",
+      ];
+      const images = [
+        "chair.png",
+        "earth.png",
+        "heart.png",
+        "thumb.png",
+        "apple.jpeg",
+        "tiger.jpeg",
+        "bicycle.jpeg",
+      ];
+      let currentWordIndex = 0;
+      let currentWord = words[currentWordIndex];
+      let currentImage = images[currentWordIndex];
+
+      // Initialize selected letters
+      let selectedLetters = "";
+
+      // Function to shuffle a string
+      function shuffleString(string) {
+        return string
+          .split("")
+          .sort(() => Math.random() - 0.5)
+          .join("");
+      }
+
+      // Get a reference to the containers
+      const wordImage = document.getElementById("wordImage");
+      const lettersContainer = document.getElementById("lettersContainer");
+      const selectedLettersContainer =
+        document.getElementById("selectedLetters");
+      const messageContainer = document.getElementById("message");
+
+      // Function to initialize a new word
+      function initializeWord() {
+        // Shuffle the letters of the current word
+        const jumbledWord = shuffleString(currentWord);
+
+        // Display the current image and jumbled letters
+        wordImage.src = "./assets/" + currentImage;
+        lettersContainer.textContent = "";
+
+        // Create letter cards for each letter in the current word
+        for (let i = 0; i < jumbledWord.length; i++) {
+          const letter = jumbledWord[i];
+          const letterCard = document.createElement("div");
+          letterCard.classList.add("letter-card");
+          letterCard.classList.add("card");
+          letterCard.textContent = letter;
+          letterCard.addEventListener("click", () => {
+            // Add clicked letter to selected letters
+            selectedLetters += letter;
+            selectedLettersContainer.textContent = selectedLetters;
+            // Check if the selected letters match the correct word
+            if (selectedLetters === currentWord) {
+              messageContainer.textContent = "Congratulations! You won!";
+              // Move to the next word
+              currentWordIndex = (currentWordIndex + 1) % words.length;
+              currentWord = words[currentWordIndex];
+              currentImage = images[currentWordIndex];
+              // Clear selected letters and message
+              selectedLetters = "";
+              selectedLettersContainer.textContent = "";
+              messageContainer.textContent = "";
+              // Initialize the next word
+              initializeWord();
+            } else if (currentWord.startsWith(selectedLetters)) {
+              // If the selected letters match the beginning of the correct word,
+              // but are not yet complete, display a hint
+              messageContainer.textContent = "Keep going...";
+            }
+            // Remove the letter card
+            letterCard.style.display = "none";
+          });
+          lettersContainer.appendChild(letterCard);
+        }
+      }
+      const resetButton = document.getElementById("resetButton");
+
+      // Function to reset the game
+      function resetGame() {
+        // Reset game state
+        currentWordIndex = 0;
+        currentWord = words[currentWordIndex];
+        currentImageName = imageNames[currentWordIndex];
+        score = 0;
+        selectedLetters = "";
+        // Update display
+        console.log("Hello");
+        scoreValue.textContent = score;
+        selectedLettersContainer.textContent = "";
+        messageContainer.textContent = "";
+        // Reinitialize the first word
+        initializeWord();
+      }
+      //   resetButton.addEventListener("click", resetGame);
+      // Add click event listener to the reset button
+      // Initialize the first word
+      initializeWord();
+    </script>
+  </body>
+</html>
